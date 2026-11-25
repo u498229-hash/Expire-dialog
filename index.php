@@ -4,9 +4,12 @@
  * Public key creation is enabled; anyone who knows the endpoint can create keys.
  * All keys last exactly 24 hours. Set APP_EXPIRES_AT and APP_REDIRECT_URL before hosting.
  */
-$volumePath = getenv('RAILWAY_VOLUME_MOUNT_PATH');
-$STORE_FILE = ($volumePath !== false && $volumePath !== '')
-    ? rtrim($volumePath, '/') . '/.key_store.php'
+$keyStorageDir = getenv('KEY_STORAGE_DIR');
+if ($keyStorageDir === false || $keyStorageDir === '') {
+    $keyStorageDir = getenv('RAILWAY_VOLUME_MOUNT_PATH');
+}
+$STORE_FILE = ($keyStorageDir !== false && $keyStorageDir !== '')
+    ? rtrim($keyStorageDir, '/') . '/.key_store.php'
     : __DIR__ . '/.key_store.php';
 
 header('Content-Type: application/json; charset=utf-8');

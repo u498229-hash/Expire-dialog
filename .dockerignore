@@ -1,0 +1,6 @@
+.git
+.gitignore
+.env
+.env.*
+.key_store.php
+README.md
